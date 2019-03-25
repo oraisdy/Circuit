@@ -1,0 +1,81 @@
+.card {
+  border: 1px solid #ccc;
+  width: 1200px;
+  height: 600px;
+}
+#canvasContainer {
+}
+
+/**
+  v2
+*/
+
+#main-container {
+  display: flex;
+  margin-top: 30px;
+}
+#left-container {
+  width: 300px;
+  height: 800px;
+  border: 1px solid #ccc;
+}
+#draw-container {
+  flex: 1;
+  height: 800px;
+  border: 1px solid #ccc;
+  margin-left: 50px;
+  position: relative;
+}
+
+.item-container {
+  list-style: none;
+}
+
+.item-container li {
+  margin: 30px 20px;
+}
+
+.meter {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 26px;
+  border: 2px solid #666;
+  position: absolute;
+}
+
+.resistance {
+  width: 80px;
+  height: 20px;
+  border: 2px solid #666;
+  position: absolute;
+}
+
+.switch {
+  width: 80px;
+  height: 80px;
+  background-image: url("../imgs/switch.png");
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+.light {
+  width: 80px;
+  height: 80px;
+  background-image: url("../imgs/light.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #666;
+}
+
+.to-choose {
+  position: static;
+}
+
+#switch-origin {
+  top: 50%;
+  left: 50%;
+}
