@@ -9,15 +9,15 @@ export default class DeviceFactory {
   static getInstance(type) {
     if (type.toLowerCase) {
       switch (type.toLowerCase()) {
-        case "Bt":
+        case "p":
           return new Battery();
-        case "B":
+        case "b":
           return new Bulb();
-        case "R":
+        case "r":
           return new Resistor();
-        case "A":
+        case "a":
           return new Ammeter();
-        case "V":
+        case "v":
           return new Voltmeter();
       }
     }

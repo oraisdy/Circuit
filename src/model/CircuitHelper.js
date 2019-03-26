@@ -1,18 +1,3 @@
-var arr = [
-  ["", "a", "b", "c", "d", "e", "f", "g", "z"],
-  ["a", 0, 1, 0, 0, 0, 1, 0, 0],
-  ["b", 1, 0, 0, 0, 0, 1, 0, 0],
-  ["c", 0, 0, 0, 1, 0, 0, 1, 0],
-  ["d", 0, 0, 1, 0, 0, 0, 1, 0],
-  ["e", 0, 0, 0, 0, 0, 0, 0, 1],
-  ["f", 1, 1, 0, 0, 0, 0, 0, 0],
-  ["g", 0, 0, 1, 1, 0, 0, 0, 0],
-  ["z", 0, 0, 0, 0, 1, 0, 0, 0]
-];
-
-// [端点1，端点2，元件代号，电阻值]
-var rel = [["f", "g", "R", 4], ["d", "e", "R", 1], ["b", "c", "V", 10000000]];
-
 function deepcopy(obj) {
   var out = [],
     i = 0,
@@ -25,10 +10,12 @@ function deepcopy(obj) {
   return out;
 }
 
-var firstRel = deepcopy(rel);
+// var firstRel = deepcopy(rel)
 
 // az之间的电压
-var V = 10;
+var V1 = 10;
+
+var arr, rel, V, firstRel;
 
 var map = {};
 var charArr, newArr;
@@ -296,7 +283,15 @@ function pathsAndAList() {
 // console.log(alist)
 
 // 以下求电流和电压
-export function AinTwoPoints(arr, rel, V, p1, p2) {
+export function AinTwoPoints(arr1, rel1, V1, p1, p2) {
+  arr = deepcopy(arr1);
+  rel = deepcopy(rel1);
+  V = V1;
+  firstRel = deepcopy(rel1);
+  // console.log(arr)
+  // console.log(rel)
+  // console.log(V)
+  // console.log(firstRel)
   init();
   var a = [];
   if (map[p1] != undefined) {
@@ -332,19 +327,19 @@ export function AinTwoPoints(arr, rel, V, p1, p2) {
   return alist[indexInPaths];
 }
 
-export function VinTwoPoints(p1, p2) {
-  init();
-  // 求电流
-  var A = AinTwoPoints(p1, p2);
+export function VinTwoPoints(arr1, rel1, V1, p1, p2) {
+  var A = AinTwoPoints(arr1, rel1, V1, p1, p2);
   // 求在最原始rel中的对应电阻
   var indexInFirstRel = -1;
-  for (var i = 0; i < firstRel.length; i++) {
-    if (firstRel[i].indexOf(p1) > -1 && firstRel[i].indexOf(p2) > -1) {
+
+  for (var i = 0; i < rel1.length; i++) {
+    if (rel1[i].indexOf(p1) > -1 && rel1[i].indexOf(p2) > -1) {
       indexInFirstRel = i;
       break;
     }
   }
-  var R = firstRel[indexInFirstRel][3];
+
+  var R = rel1[indexInFirstRel][3];
   return (A * R).toFixed(1);
 }
 
@@ -356,7 +351,20 @@ function init() {
   //  第三步得到路径和对应的电流数组
   pathsAndAList();
 }
-console.log("de电流" + AinTwoPoints("d", "e"));
-console.log("fg电流" + AinTwoPoints("f", "g"));
-console.log("de电压", VinTwoPoints("d", "e"));
-console.log("fg电压", VinTwoPoints("f", "g"));
+
+// var arr1 = [
+//   ["", "a", "b", "c", "d", "e", "f", "g", "z"],
+//   ["a", 0, 1, 0, 0, 0, 1, 0, 0],
+//   ["b", 1, 0, 0, 0, 0, 1, 0, 0],
+//   ["c", 0, 0, 0, 1, 0, 0, 1, 0],
+//   ["d", 0, 0, 1, 0, 0, 0, 1, 0],
+//   ["e", 0, 0, 0, 0, 0, 0, 0, 1],
+//   ["f", 1, 1, 0, 0, 0, 0, 0, 0],
+//   ["g", 0, 0, 1, 1, 0, 0, 0, 0],
+//   ["z", 0, 0, 0, 0, 1, 0, 0, 0]
+// ];
+// var rel1 = [["f", "g", "R", 4], ["d", "e", "R", 1], ["b", "c", "V", 10000000]];
+// console.log("de电流" + AinTwoPoints(arr1, rel1, V1, "d", "e"));
+// console.log("fg电流" + AinTwoPoints(arr1, rel1, V1, "f", "g"));
+// console.log("de电压", VinTwoPoints(arr1, rel1, V1, "d", "e"));
+// console.log("fg电压", VinTwoPoints(arr1, rel1, V1, "f", "g"));
