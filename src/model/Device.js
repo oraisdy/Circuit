@@ -4,6 +4,7 @@ export default class Device {
     this.anchor2 = null;
     this.type = null;
     this.resistance = 0;
+    this.id = null;
   }
   toRel() {
     return [this.anchor1, this.anchor2, this.type, this.resistance];

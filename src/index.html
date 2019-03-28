@@ -5,11 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>中学物理电路</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="http://www.jq22.com/jquery/1.4.4/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.bootcss.com/jsPlumb/2.6.8/js/jsplumb.min.js"></script>
   </head>
   <body>
-    <div id="main-container">
+    <!-- <div id="main-container">
       <div id="left-container">
         <ul class="item-container">
           <li><div class="switch to-choose"></div></li>
@@ -21,6 +25,24 @@
         </ul>
       </div>
       <div id="draw-container"></div>
+    </div> -->
+    <div class="container">
+      <canvas
+        id="myCanvas"
+        width="1920"
+        height="1080"
+        style="background-color:#fff"
+        oncontextmenu="return false;"
+      >
+        <span style="background-color:lightblue;"
+          >The &lt;canvas&gt; element is not supported by this browser.</span
+        >
+      </canvas>
+      <div class="btn-container">
+        <span class="btn back"><i class="iconfont">&#xe7fe;</i></span>
+        <span class="btn watch"><i class="iconfont">&#xe78f;</i></span>
+        <span class="btn delete"><i class="iconfont">&#xe7c3;</i></span>
+      </div>
     </div>
   </body>
 </html>

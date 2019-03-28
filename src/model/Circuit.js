@@ -7,20 +7,13 @@ export default class Circuit {
     this.V = 10;
     this.arr = [];
     this.rel = [];
-    // var arr = [
-    //   ["", "a", "b", "c", "d", "e", "f", "g", "z"],
-    //   ["a", 0, 1, 0, 0, 0, 1, 0, 0],
-    //   ["b", 1, 0, 0, 0, 0, 1, 0, 0],
-    //   ["c", 0, 0, 0, 1, 0, 0, 1, 0],
-    //   ["d", 0, 0, 1, 0, 0, 0, 1, 0],
-    //   ["e", 0, 0, 0, 0, 0, 0, 0, 1],
-    //   ["f", 1, 1, 0, 0, 0, 0, 0, 0],
-    //   ["g", 0, 0, 1, 1, 0, 0, 0, 0],
-    //   ["z", 0, 0, 0, 0, 1, 0, 0, 0]
-    // ];
-
-    // // [端点1，端点2，元件代号，电阻值]
-    // var rel = [["f", "g", "R", 4], ["d", "e", "R", 1], ["b", "c", "V", 10000000]];
+  }
+  clear() {
+    this.devices = [];
+    this.edges = [];
+    this.V = 10;
+    this.arr = [];
+    this.rel = [];
   }
   connect() {
     const rel = this.devices
@@ -42,8 +35,8 @@ export default class Circuit {
     }
     let power = this.devices.filter(d => d.type.toLowerCase() === "bt");
     if (power.length === 0) {
-      alert("没有电源，无法联通电路");
-      return;
+      // alert("没有电源，无法联通电路");
+      return false;
     }
     power = power[0];
     // console.log(power);
@@ -55,34 +48,56 @@ export default class Circuit {
     }
     this.arr = arr;
     this.rel = rel;
-    console.log(JSON.stringify(arr));
-    console.log(JSON.stringify(rel));
+    // console.log(JSON.stringify(arr));
+    // console.log(JSON.stringify(rel));
     // console.log("fg电流" + AinTwoPoints(arr, rel, 10, "f", "g"));
     // console.log("de电压", VinTwoPoints(arr, rel, V1, "d", "e"));
     // console.log("fg电压", VinTwoPoints(arr, rel, V1, "f", "g"));
+  }
+  showValues() {
+    const aValues = this.devices
+      .filter(d => d.type.toLowerCase() === "a")
+      .map(d => ({
+        [d.id]: this.getAinTwoPoints(d.anchor1, d.anchor2) + " A"
+      }));
+    const vValues = this.devices
+      .filter(d => d.type.toLowerCase() === "v")
+      .map(d => ({
+        [d.id]: this.getVinTwoPoints(d.anchor1, d.anchor2) + " V"
+      }));
+    return aValues.concat(vValues);
   }
   getAinTwoPoints(p1, p2) {
     console.log(
       `${p1}-${p2}电流` + AinTwoPoints(this.arr, this.rel, this.V, p1, p2)
     );
+    return AinTwoPoints(this.arr, this.rel, this.V, p1, p2);
   }
   getVinTwoPoints(p1, p2) {
     console.log(
       `${p1}-${p2}电压` + VinTwoPoints(this.arr, this.rel, this.V, p1, p2)
     );
+    return VinTwoPoints(this.arr, this.rel, this.V, p1, p2);
   }
   // 加一个元件，a1 a2是左右两个锚点的id
-  addDevice(type, a1, a2) {
-    console.log("addDevice", type, a1, a2);
+  addDevice(type, a1, a2, id) {
     const device = DeviceFactory.getInstance(type);
     device.anchor1 = a1;
     device.anchor2 = a2;
+    device.id = id;
     device && this.devices.push(device);
     return this;
   }
-  addEdge(a1, a2) {
-    console.log("addEdge", a1, a2);
-    this.edges.push([a1, a2]);
+  deleteDevice(id) {
+    this.devices = this.devices.filter(d => d.id !== id);
+  }
+  addEdge(a1, a2, eid) {
+    this.edges.push([a1, a2, eid]);
+    this.connect();
     return this;
+  }
+  deleteEdge(eid) {
+    this.edges = this.edges.filter(e => e[2] !== eid);
+    this.connect();
   }
 }

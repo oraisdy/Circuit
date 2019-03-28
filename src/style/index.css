@@ -1,9 +1,71 @@
-.card {
-  border: 1px solid #ccc;
-  width: 1200px;
-  height: 600px;
+@font-face {
+  font-family: "iconfont"; /* project id 1109972 */
+  src: url("//at.alicdn.com/t/font_1109972_hedignusqji.eot");
+  src: url("//at.alicdn.com/t/font_1109972_hedignusqji.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_1109972_hedignusqji.woff2") format("woff2"),
+    url("//at.alicdn.com/t/font_1109972_hedignusqji.woff") format("woff"),
+    url("//at.alicdn.com/t/font_1109972_hedignusqji.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_1109972_hedignusqji.svg#iconfont") format("svg");
 }
-#canvasContainer {
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 24px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  touch-action: none;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  width: 100%;
+  margin: auto;
+  height: 80vh;
+  background: #eee;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+#myCanvas {
+  /* visibility: hidden; */
+  /* position: absolute;
+  left: 0;
+  top: 0;
+  index: 1; */
+  background-color: #dddddd;
+  background: -webkit-linear-gradient(top, transparent 39px, #eee 40px),
+    -webkit-linear-gradient(left, transparent 39px, #eee 40px);
+  background-size: 40px 40px;
+  z-index: 0;
+  position: absolute;
+}
+.btn-container {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  width: 50px;
+}
+.btn {
+  display: block;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  box-shadow: 2px 2px #ccc;
+  text-align: center;
+  font-size: 24px;
+  background: #ffffff;
+  color: #666;
+  line-height: 50px;
+  cursor: pointer;
 }
 
 /**
@@ -36,14 +98,19 @@
 }
 
 .meter {
-  width: 80px;
-  height: 80px;
-  line-height: 80px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
   border-radius: 50%;
   text-align: center;
   font-size: 26px;
   border: 2px solid #666;
   position: absolute;
+  cursor: pointer;
+}
+
+.meter.value {
+  font-size: 18px;
 }
 
 .resistance {
@@ -51,6 +118,7 @@
   height: 20px;
   border: 2px solid #666;
   position: absolute;
+  cursor: pointer;
 }
 
 .switch {
@@ -59,25 +127,29 @@
   background-image: url("../imgs/switch.png");
   background-repeat: no-repeat;
   position: absolute;
+  cursor: pointer;
 }
 
 .power {
   width: 80px;
-  height: 80px;
+  height: 50px;
   background-image: url("../imgs/battery.png");
-  background-size: 80px 40px;
+  background-size: 80px 50px;
   background-repeat: no-repeat;
   position: absolute;
+  cursor: pointer;
 }
 
 .light {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-image: url("../imgs/light.png");
+  background-size: 60px 60px;
   background-repeat: no-repeat;
   position: absolute;
   border-radius: 50%;
   border: 2px solid #666;
+  cursor: pointer;
 }
 
 .to-choose {
